@@ -15,7 +15,7 @@
 
 # Builds a docker image for Kafka Connect
 
-FROM confluentinc/cp-kafka
+FROM kymeric/cp-kafka
 
 MAINTAINER partner-support@confluent.io
 LABEL io.confluent.docker=true
@@ -30,6 +30,7 @@ ENV COMPONENT=kafka-connect
 EXPOSE 8083
 
 RUN echo "===> Installing Schema Registry (for Avro jars) ..." \
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8B1DA6120C2BF624 \
     && apt-get -qq update \
     && apt-get install -y \
         confluent-schema-registry=${CONFLUENT_VERSION}${CONFLUENT_PLATFORM_LABEL}-${CONFLUENT_DEB_VERSION} \
